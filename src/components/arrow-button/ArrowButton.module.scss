@@ -11,6 +11,11 @@
 	background-color: #000000;
 	border-right: 1px;
 	transition: transform 0.5s ease;
+	cursor: pointer;
+}
+
+.container:hover {
+	background-color: var(--gold, #ffc802);
 }
 
 .container_open {
