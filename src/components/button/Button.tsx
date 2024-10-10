@@ -15,12 +15,13 @@ export const Button = ({
 	type: 'apply' | 'reset';
 }) => {
 	return (
-		<button className={clsx(
-			styles.button,
-			{ [styles.button_apply]: type === 'apply' },
-			{ [styles.button_reset]: type === 'reset' }
-			)} 
-			type={htmlType} 
+		<button
+			className={clsx(
+				styles.button,
+				{ [styles.button_apply]: type === 'apply' },
+				{ [styles.button_reset]: type === 'reset' }
+			)}
+			type={htmlType}
 			onClick={onClick}>
 			<Text weight={800} uppercase>
 				{title}
