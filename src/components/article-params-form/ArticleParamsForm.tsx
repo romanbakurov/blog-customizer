@@ -20,18 +20,18 @@ import { Text } from '../text';
 import { Separator } from '../separator';
 
 type ArticleParamsFormProps = {
-	selected: ArticleStateType;
+	defaultState: ArticleStateType;
 	settingsHandleChange: (newState: ArticleStateType) => void;
 };
 
 export const ArticleParamsForm = ({
-	selected,
+	defaultState,
 	settingsHandleChange,
 }: ArticleParamsFormProps) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const formRef = useRef<HTMLDivElement>(null);
 	const selectRef = useRef<HTMLDivElement>(null);
-	const [options, setOptions] = useState<ArticleStateType>({ ...selected });
+	const [options, setOptions] = useState<ArticleStateType>({ ...defaultState });
 
 	useOutsideClickClose({
 		isOpen,
@@ -82,14 +82,14 @@ export const ArticleParamsForm = ({
 						title='размер шрифта'
 					/>
 					<Select
-						title='цвет текста'
+						title='цвет шрифта'
 						options={fontColors}
 						selected={options.fontColor}
 						onChange={makeUpdateOptionHandler('fontColor')}
 					/>
 					<Separator />
 					<Select
-						title='цвет шрифта'
+						title='цвет фона'
 						options={backgroundColors}
 						selected={options.backgroundColor}
 						onChange={makeUpdateOptionHandler('backgroundColor')}
@@ -106,8 +106,8 @@ export const ArticleParamsForm = ({
 							htmlType='submit'
 							type='reset'
 							onClick={() => {
-								setOptions({ ...selected });
-								settingsHandleChange({ ...selected });
+								setOptions({ ...defaultState });
+								settingsHandleChange({ ...defaultState });
 							}}
 						/>
 						<Button title='Применить' htmlType='submit' type='apply' />
