@@ -1,6 +1,5 @@
 import { createRoot } from 'react-dom/client';
 import { StrictMode, CSSProperties, useState } from 'react';
-import clsx from 'clsx';
 
 import { Article } from './components/article/Article';
 import { ArticleParamsForm } from './components/article-params-form/ArticleParamsForm';
@@ -30,9 +29,7 @@ const App = () => {
 	}
 
 	return (
-		<main
-			className={clsx(styles.main)}
-			style={makeClassForSettings(articleState)}>
+		<main className={styles.main} style={makeClassForSettings(articleState)}>
 			<ArticleParamsForm
 				defaultState={defaultArticleState}
 				applyStatesHandler={setArticleState}

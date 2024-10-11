@@ -28,15 +28,15 @@ export const ArticleParamsForm = ({
 	defaultState,
 	applyStatesHandler,
 }: ArticleParamsFormProps) => {
-	const [isOpen, setIsOpen] = useState<boolean>(false);
+	const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 	const arrowButtonRef = useRef<HTMLDivElement>(null);
 	const sideBarElementRef = useRef<HTMLDivElement>(null);
 	const [options, setOptions] = useState<ArticleStateType>({ ...defaultState });
 
 	useOutsideClickClose({
-		isOpen,
+		isMenuOpen,
 		rootRef: [arrowButtonRef, sideBarElementRef],
-		onChange: setIsOpen,
+		onChange: setIsMenuOpen,
 	});
 
 	function makeUpdateOptionHandler(
@@ -53,11 +53,13 @@ export const ArticleParamsForm = ({
 		<>
 			<ArrowButton
 				ref={sideBarElementRef}
-				isOpen={isOpen}
-				onClick={() => setIsOpen((isOpen) => !isOpen)}
+				isOpen={isMenuOpen}
+				onClick={() => setIsMenuOpen((isOpen) => !isOpen)}
 			/>
 			<aside
-				className={clsx(styles.container, { [styles.container_open]: isOpen })}
+				className={clsx(styles.container, {
+					[styles.container_open]: isMenuOpen,
+				})}
 				ref={arrowButtonRef}>
 				<form
 					className={styles.form}
