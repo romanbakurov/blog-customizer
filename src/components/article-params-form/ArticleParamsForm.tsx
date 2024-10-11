@@ -21,21 +21,21 @@ import { Separator } from '../separator';
 
 type ArticleParamsFormProps = {
 	defaultState: ArticleStateType;
-	settingsHandleChange: (newState: ArticleStateType) => void;
+	applyStatesHandler: (newState: ArticleStateType) => void;
 };
 
 export const ArticleParamsForm = ({
 	defaultState,
-	settingsHandleChange,
+	applyStatesHandler,
 }: ArticleParamsFormProps) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
-	const formRef = useRef<HTMLDivElement>(null);
-	const selectRef = useRef<HTMLDivElement>(null);
+	const arrowButtonRef = useRef<HTMLDivElement>(null);
+	const sideBarElementRef = useRef<HTMLDivElement>(null);
 	const [options, setOptions] = useState<ArticleStateType>({ ...defaultState });
 
 	useOutsideClickClose({
 		isOpen,
-		rootRef: [formRef, selectRef],
+		rootRef: [arrowButtonRef, sideBarElementRef],
 		onChange: setIsOpen,
 	});
 
@@ -52,18 +52,18 @@ export const ArticleParamsForm = ({
 	return (
 		<>
 			<ArrowButton
-				ref={selectRef}
+				ref={sideBarElementRef}
 				isOpen={isOpen}
 				onClick={() => setIsOpen((isOpen) => !isOpen)}
 			/>
 			<aside
 				className={clsx(styles.container, { [styles.container_open]: isOpen })}
-				ref={formRef}>
+				ref={arrowButtonRef}>
 				<form
 					className={styles.form}
 					onSubmit={(e) => {
 						e.preventDefault();
-						settingsHandleChange(options);
+						applyStatesHandler(options);
 					}}>
 					<Text as={'h2'} size={31} uppercase weight={800}>
 						Задайте параметры
@@ -107,7 +107,7 @@ export const ArticleParamsForm = ({
 							type='reset'
 							onClick={() => {
 								setOptions({ ...defaultState });
-								settingsHandleChange({ ...defaultState });
+								applyStatesHandler({ ...defaultState });
 							}}
 						/>
 						<Button title='Применить' htmlType='submit' type='apply' />

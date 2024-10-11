@@ -19,7 +19,7 @@ const App = () => {
 	const [articleState, setArticleState] =
 		useState<ArticleStateType>(defaultArticleState);
 
-	function settingsHandleChange(newState: ArticleStateType): CSSProperties {
+	function makeClassForSettings(newState: ArticleStateType): CSSProperties {
 		return {
 			'--font-family': newState.fontFamilyOption.value,
 			'--font-size': newState.fontSizeOption.value,
@@ -32,10 +32,10 @@ const App = () => {
 	return (
 		<main
 			className={clsx(styles.main)}
-			style={settingsHandleChange(articleState)}>
+			style={makeClassForSettings(articleState)}>
 			<ArticleParamsForm
 				defaultState={defaultArticleState}
-				settingsHandleChange={setArticleState}
+				applyStatesHandler={setArticleState}
 			/>
 			<Article />
 		</main>
